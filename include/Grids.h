@@ -24,7 +24,7 @@ public:
     std::pair<unsigned long, unsigned long> mGridSize;
     std::vector<std::vector<Cell> > mData;
 public:
-    explicit Grids(const pcl::PointCloud<pcl::PointXYZ>::Ptr cloud, double gridLength);
+    explicit Grids(const pcl::PointCloud<pcl::PointXYZI>::Ptr cloud, double gridLength);
     void GaussFilter(std::vector<Cell> & row);
     std::pair<int, int> Convert(double x, double y);
 };

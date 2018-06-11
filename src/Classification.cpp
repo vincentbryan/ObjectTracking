@@ -4,10 +4,10 @@
 #include <pcl/point_types.h>
 #include "Classification.h"
 
-Classification::Classification(Grids * grids, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud)
+Classification::Classification(Grids * grids, pcl::PointCloud<pcl::PointXYZI>::Ptr cloud)
     : mGrids(grids),
       mClusterId(0),
-      mClusteredCloud(new pcl::PointCloud<pcl::PointXYZRGB>())
+      mClusteredCloud(new pcl::PointCloud<pcl::PointXYZI>())
 {
     ComponentClustering();
 
@@ -20,11 +20,10 @@ Classification::Classification(Grids * grids, pcl::PointCloud<pcl::PointXYZ>::Pt
     {
         auto index = mGrids->Convert(point.x, point.y);
         unsigned int cluster_id = mGrids->mData[index.first][index.second].clusterId;
-
 //        pcl::PointXYZRGB obj(uint8_t((500*cluster_id)%255),
 //                             uint8_t((100*cluster_id)%255),
 //                             uint8_t((150*cluster_id)%255));
-        pcl::PointXYZRGB obj;
+        pcl::PointXYZI obj;
         obj.x = point.x;
         obj.y = point.y;
         obj.z = point.z;

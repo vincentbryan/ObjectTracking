@@ -5,10 +5,10 @@
 #include <GaussKernel.h>
 #include "Segmentation.h"
 
-Segmentation::Segmentation(Grids * grids, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud)
+Segmentation::Segmentation(Grids * grids, pcl::PointCloud<pcl::PointXYZI>::Ptr cloud)
     : mGrids(grids),
-      mGroundData(new pcl::PointCloud<pcl::PointXYZ>()),
-      mEvaluatedData(new pcl::PointCloud<pcl::PointXYZ>())
+      mGroundData(new pcl::PointCloud<pcl::PointXYZI>()),
+      mEvaluatedData(new pcl::PointCloud<pcl::PointXYZI>())
 {
     for (auto & row : grids->mData)
     {

@@ -18,16 +18,16 @@ private:
     const double heightDiffMax = 0.4;
     Grids * mGrids;
 
-    pcl::PointCloud<pcl::PointXYZ>::Ptr mGroundData;
-    pcl::PointCloud<pcl::PointXYZ>::Ptr mEvaluatedData;
+    pcl::PointCloud<pcl::PointXYZI>::Ptr mGroundData;
+    pcl::PointCloud<pcl::PointXYZI>::Ptr mEvaluatedData;
 
 public:
-    explicit Segmentation(Grids * grids, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud);
+    explicit Segmentation(Grids * grids, pcl::PointCloud<pcl::PointXYZI>::Ptr cloud);
 
     void MeanFilter();
 
-    pcl::PointCloud<pcl::PointXYZ>::Ptr GetGroundData(){ return mGroundData;}
-    pcl::PointCloud<pcl::PointXYZ>::Ptr GetEvaluateData(){ return mEvaluatedData;}
+    pcl::PointCloud<pcl::PointXYZI>::Ptr GetGroundData(){ return mGroundData;}
+    pcl::PointCloud<pcl::PointXYZI>::Ptr GetEvaluateData(){ return mEvaluatedData;}
 
 };
 

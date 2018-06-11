@@ -16,13 +16,13 @@ class Classification
 private:
     unsigned int mClusterId;
     Grids * mGrids;
-    pcl::PointCloud<pcl::PointXYZRGB>::Ptr mClusteredCloud;
+    pcl::PointCloud<pcl::PointXYZI>::Ptr mClusteredCloud;
     std::vector<Object> mResult;
 
     void ComponentClustering();
     void Search(int i, int j);
 public:
-    explicit Classification(Grids * grids, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud);
-    pcl::PointCloud<pcl::PointXYZRGB>::Ptr GetColoredCloud(){return mClusteredCloud;}
+    explicit Classification(Grids * grids, pcl::PointCloud<pcl::PointXYZI>::Ptr cloud);
+    pcl::PointCloud<pcl::PointXYZI>::Ptr GetColoredCloud(){return mClusteredCloud;}
     std::vector<Object> GetResult(){ return mResult;}
 };

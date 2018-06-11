@@ -28,14 +28,14 @@ void callback(const sensor_msgs::PointCloud2ConstPtr& input)
     static int frame_id = 0;
     ROS_INFO_STREAM("Frame : " << frame_id++);
 
-    pcl::PointCloud<pcl::PointXYZ>::Ptr ptr_raw_data(new pcl::PointCloud<pcl::PointXYZ>());
-    pcl::PointCloud<pcl::PointXYZ>::Ptr ptr_processed_data(new pcl::PointCloud<pcl::PointXYZ>());
-    pcl::PointCloud<pcl::PointXYZ>::Ptr ptr_ground_data(new pcl::PointCloud<pcl::PointXYZ>());
-    pcl::PointCloud<pcl::PointXYZ>::Ptr ptr_evaluated_data(new pcl::PointCloud<pcl::PointXYZ>());
+    pcl::PointCloud<pcl::PointXYZI>::Ptr ptr_raw_data(new pcl::PointCloud<pcl::PointXYZI>());
+    pcl::PointCloud<pcl::PointXYZI>::Ptr ptr_processed_data(new pcl::PointCloud<pcl::PointXYZI>());
+    pcl::PointCloud<pcl::PointXYZI>::Ptr ptr_ground_data(new pcl::PointCloud<pcl::PointXYZI>());
+    pcl::PointCloud<pcl::PointXYZI>::Ptr ptr_evaluated_data(new pcl::PointCloud<pcl::PointXYZI>());
     pcl::PointCloud<pcl::PointXYZRGB>::Ptr ptr_clustered_data(new pcl::PointCloud<pcl::PointXYZRGB>());
 
     pcl::fromROSMsg(*input, *ptr_raw_data);
-
+/*
     //region Preprocess
     double radius_min = 4.0, radius_max = 18.0;
 
@@ -72,6 +72,7 @@ void callback(const sensor_msgs::PointCloud2ConstPtr& input)
     gObstalcePublisher.publish(obstacle_msg);
 
     //endregion
+    */
 }
 
 int main(int argc, char ** argv)

@@ -4,7 +4,7 @@
 #include <pcl/point_types.h>
 #include "Grids.h"
 
-Grids::Grids(const pcl::PointCloud<pcl::PointXYZ>::Ptr cloud, double gridLength)
+Grids::Grids(const pcl::PointCloud<pcl::PointXYZI>::Ptr cloud, double gridLength)
 {
     assert(!cloud->empty());
 

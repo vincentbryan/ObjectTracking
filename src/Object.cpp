@@ -12,7 +12,7 @@ void Object::AddPosition(std::pair<int, int> pos)
     }
 }
 
-void Object::AddPoint(pcl::PointXYZRGB point)
+void Object::AddPoint(pcl::PointXYZI point)
 {
     mPoints->push_back(point);
 }

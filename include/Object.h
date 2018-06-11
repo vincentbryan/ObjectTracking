@@ -12,12 +12,12 @@ private:
     unsigned int mObjectId;
     unsigned int mClusterId;
     std::vector<std::pair<int, int> > mPositions;
-    pcl::PointCloud<pcl::PointXYZRGB>::Ptr mPoints;
+    pcl::PointCloud<pcl::PointXYZI>::Ptr mPoints;
 
 public:
     explicit Object(unsigned int id) : mClusterId(id){}
     void AddPosition(std::pair<int, int> pos);
-    void AddPoint(pcl::PointXYZRGB point);
+    void AddPoint(pcl::PointXYZI point);
 
     class Profile
     {

@@ -19,6 +19,7 @@
 #include <Grids.h>
 #include <Segmentation.h>
 #include <Classification.h>
+#include <Tracking.h>
 
 ros::Publisher gGroundPublisher;
 ros::Publisher gObstalcePublisher;
@@ -35,7 +36,7 @@ void callback(const sensor_msgs::PointCloud2ConstPtr& input)
     pcl::PointCloud<pcl::PointXYZRGB>::Ptr ptr_clustered_data(new pcl::PointCloud<pcl::PointXYZRGB>());
 
     pcl::fromROSMsg(*input, *ptr_raw_data);
-/*
+
     //region Preprocess
     double radius_min = 4.0, radius_max = 18.0;
 
@@ -54,7 +55,11 @@ void callback(const sensor_msgs::PointCloud2ConstPtr& input)
     ptr_evaluated_data = segmentation.GetEvaluateData();
 
     Classification classification(grids, ptr_evaluated_data);
-    ptr_clustered_data = classification.GetColoredCloud();
+
+    static Tracking tracking;
+    tracking.Matching(classification.GetResult());
+
+    ptr_clustered_data = tracking.GetColoredObjects();
 
     //region output
 
@@ -72,7 +77,7 @@ void callback(const sensor_msgs::PointCloud2ConstPtr& input)
     gObstalcePublisher.publish(obstacle_msg);
 
     //endregion
-    */
+
 }
 
 int main(int argc, char ** argv)
@@ -85,21 +90,6 @@ int main(int argc, char ** argv)
     gGroundPublisher = nodeHandle.advertise<sensor_msgs::PointCloud2>("ground_cloud", 1);
     gObstalcePublisher = nodeHandle.advertise<sensor_msgs::PointCloud2>("obstacle_cloud", 1);
 
-    auto test= std::function<void(int)>();
-    test = [&](int i)
-    {
-        if(i > 0)
-        {
-            std::cout << i << std::endl;
-            test(--i);
-        }
-        else
-        {
-            return;
-        }
-
-    };
-    test(10);
 
     ros::spin();
 

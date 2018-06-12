@@ -11,7 +11,7 @@ Classification::Classification(Grids * grids, pcl::PointCloud<pcl::PointXYZI>::P
 {
     ComponentClustering();
 
-    for (unsigned int i = 0; i <= mClusterId; ++i)
+    for (unsigned int i = 1; i <= mClusterId; ++i)
         mResult.emplace_back(Object(i));
 
     assert(mClusterId > 0);
@@ -20,19 +20,15 @@ Classification::Classification(Grids * grids, pcl::PointCloud<pcl::PointXYZI>::P
     {
         auto index = mGrids->Convert(point.x, point.y);
         unsigned int cluster_id = mGrids->mData[index.first][index.second].clusterId;
-//        pcl::PointXYZRGB obj(uint8_t((500*cluster_id)%255),
-//                             uint8_t((100*cluster_id)%255),
-//                             uint8_t((150*cluster_id)%255));
-        pcl::PointXYZI obj;
-        obj.x = point.x;
-        obj.y = point.y;
-        obj.z = point.z;
 
-        mClusteredCloud->push_back(obj);
+        mClusteredCloud->push_back(point);
 
-        mResult[cluster_id].AddPoint(obj);
-        mResult[cluster_id].AddPosition(index);
+        mResult[cluster_id-1].AddPoint(point);
+        mResult[cluster_id-1].AddPosition(index);
     }
+
+    for (auto & result : mResult) result.GenerateProfile();
+
 }
 
 void Classification::ComponentClustering()
@@ -65,8 +61,8 @@ void Classification::ComponentClustering()
         {
             if(mGrids->mData[i][j].GetType() == Cell::Obstacle)
             {
-                search(i, j);
                 mClusterId++;
+                search(i, j);
             }
         }
     }
